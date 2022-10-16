@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search> 
+  
+  
+    
+    <entry>
+      <title>Hello World</title>
+      <link href="/2022/10/16/hello-world/"/>
+      <url>/2022/10/16/hello-world/</url>
+      
+        <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ hexo new <span class="token string">"My New Post"</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ hexo server<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ hexo generate<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ hexo deploy<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>github token 的生成</title>
+      <link href="/2022/10/16/github-token-%E7%9A%84%E7%94%9F%E6%88%90/"/>
+      <url>/2022/10/16/github-token-%E7%9A%84%E7%94%9F%E6%88%90/</url>
+      
+        <content type="html"><![CDATA[<p>参考 <a href="https://blog.csdn.net/chengwenyang/article/details/120060010">github的token使用方法</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Hexo </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Hexo </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Hexo的基本使用</title>
+      <link href="/2022/10/16/Hexo%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8-md/"/>
+      <url>/2022/10/16/Hexo%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8-md/</url>
+      
+        <content type="html"><![CDATA[<h2 id="版本"><a href="#版本" class="headerlink" title="版本"></a>版本</h2><p>hexo：1.0</p><blockquote><p>hexo1.0版本无法安装 hexo-deployer-git </p></blockquote><h2 id="Hexo安装"><a href="#Hexo安装" class="headerlink" title="Hexo安装"></a>Hexo安装</h2><pre class="line-numbers language-none"><code class="language-none">npm install -g hexo-cli<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>初始化</p><pre class="line-numbers language-none"><code class="language-none">hexo init<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>配置主题</p><p>进入themes目录，然后下载主题：</p><pre class="line-numbers language-none"><code class="language-none">git clone https:&#x2F;&#x2F;github.com&#x2F;blinkfox&#x2F;hexo-theme-matery<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>修改hexo根目录中的_config文件,将其theme设为主题的文件名:</p><pre class="line-numbers language-none"><code class="language-none">theme: hexo-theme-matery<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><h2 id="创建新页面"><a href="#创建新页面" class="headerlink" title="创建新页面"></a>创建新页面</h2><p>参考 <a href="https://yansheng836.github.io/article/7e72998a.html">Hexo新建标签、分类、归档页面</a></p><pre class="line-numbers language-none"><code class="language-none">hexo new page &quot;tags&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>然后找到&#x2F;source&#x2F;tags&#x2F;index.md，设置type为“tags”</p><pre class="line-numbers language-none"><code class="language-none">title: tagsdate: 2022-10-16 09:09:13type: &quot;tags&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre><p>其它归档、分类页面同上即可</p><h2 id="创建新博客"><a href="#创建新博客" class="headerlink" title="创建新博客"></a>创建新博客</h2><pre class="line-numbers language-none"><code class="language-none">hexo new &quot;新博客&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><h2 id="生成部署文件及预览"><a href="#生成部署文件及预览" class="headerlink" title="生成部署文件及预览"></a>生成部署文件及预览</h2><h3 id="部署文件的生成"><a href="#部署文件的生成" class="headerlink" title="部署文件的生成"></a>部署文件的生成</h3><pre class="line-numbers language-none"><code class="language-none">hexo g<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>生成部署文件，在public目录，可直接通过nginx或iis部署，</p><h3 id="本地预览"><a href="#本地预览" class="headerlink" title="本地预览"></a>本地预览</h3><pre class="line-numbers language-none"><code class="language-none">hexo s<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>如果没有错误，在浏览器中直接输入<a href="http://localhost:4000/">http://localhost:4000</a> 即可访问到。</p><h2 id="将博客部署到github中"><a href="#将博客部署到github中" class="headerlink" title="将博客部署到github中"></a>将博客部署到github中</h2><blockquote><p>提示:可以使用hexo-deployer-git部署，但Hexo1.0在本文写作时不支持此插件，故没有选择，如果hexo-deployer-git插件可以正常安装，可参考<a href="https://zhuanlan.zhihu.com/p/56101093">技术小白搭建个人博客 —— hexo+github</a></p></blockquote><p>直接将public目录上传到github，然后直接访问<a href="https://shenmamuniu.github.io/">https://shenmamuniu.github.io/</a> 即可：</p><pre class="line-numbers language-none"><code class="language-none">git initgit add .git commit -m &quot;first commit&quot;git config user.name &quot;&quot;git config user.email &quot;&quot;git remote add origin https:&#x2F;&#x2F;github.com&#x2F;shenmamuniu&#x2F;shenmamuniu.github.io.gitgit branch -M maingit push -u origin main<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>这里会涉及到登录，可生成一个<a href="https://blog.csdn.net/chengwenyang/article/details/120060010">github token</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Hexo </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Hexo </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+  
+  
+</search>
