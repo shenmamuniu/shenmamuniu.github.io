@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>Windows Server 2019禁止自动更新</title>
+      <link href="/2022/10/20/windows-server-2019-jin-zhi-zi-dong-geng-xin/"/>
+      <url>/2022/10/20/windows-server-2019-jin-zhi-zi-dong-geng-xin/</url>
+      
+        <content type="html"><![CDATA[<p>windows server 2019 调整为手动更新</p><span id="more"></span><p>在cmd中输入sconfig,然后选择”5)Windows更新设置”，之后选择手动更新即可，如图:<img src="/2022/10/20/windows-server-2019-jin-zhi-zi-dong-geng-xin/Code\blog\hexo-new2\source_posts\Windows-Server-2019禁止自动更新\2022-10-20_201808.jpg" alt="2022-10-20_201808"></p><p>参考文章<a href="https://www.cnblogs.com/yuwentao/p/15708595.html">Windows Server2019&#x2F;2022中禁用自动更新(更改为手动更新)系统</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 运维 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 运维、Windows </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>python的whl包的版本选择和依赖查询</title>
       <link href="/2022/10/16/python-de-whl-bao-de-ban-ben-xuan-ze-he-yi-lai-cha-xun/"/>
       <url>/2022/10/16/python-de-whl-bao-de-ban-ben-xuan-ze-he-yi-lai-cha-xun/</url>
