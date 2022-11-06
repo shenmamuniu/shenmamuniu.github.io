@@ -4,11 +4,10 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="WebGL系列之二：基础概念, 神马木牛">
-    <meta name="description" content="本文来自网站webglfundamentals的前三节内容。
+    <meta name="keywords" content="WebGL系列之一：OpenGL vs. WebGL, 神马木牛">
+    <meta name="description" content="本文主要介绍WebGL的起源，同OpenGL、OpenGL ES之间的关系。
 
-本文三个部分：基础概念、工作原理、Shaders和GLSL
-WebGL基础概念WebGL通常被认为是3D API，可以用来做一些很酷炫的3D的东西，实际上，它只是一个光栅化引擎">
+OpenGL And OpenGL ESOpenGL 就是 GPU 驱动 的一套标准接口;OpenGL ES 为嵌入式设备 GPU 驱动（如手机）的标准接口， ">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -20,7 +19,7 @@ WebGL基础概念WebGL通常被认为是3D API，可以用来做一些很酷炫�
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>WebGL系列之二：基础概念 | 神马木牛</title>
+    <title>WebGL系列之一：OpenGL vs. WebGL | 神马木牛</title>
     <link rel="icon" type="image/png" href="/favicon.png">
     
 
@@ -243,12 +242,12 @@ WebGL基础概念WebGL通常被认为是3D API，可以用来做一些很酷炫�
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/13.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/9.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">WebGL系列之二：基础概念</h1>
+                    <h1 class="description center-align post-title">WebGL系列之一：OpenGL vs. WebGL</h1>
                 </div>
             </div>
         </div>
@@ -311,14 +310,14 @@ WebGL基础概念WebGL通常被认为是3D API，可以用来做一些很酷炫�
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.9k
+                    1.1k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    7 分
+                    4 分
                 </div>
                 
 
@@ -341,86 +340,19 @@ WebGL基础概念WebGL通常被认为是3D API，可以用来做一些很酷炫�
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>本文来自网站<a target="_blank" rel="noopener" href="https://webglfundamentals.org/">webglfundamentals</a>的前三节内容。</p>
+                <p>本文主要介绍WebGL的起源，同OpenGL、OpenGL ES之间的关系。</p>
 <span id="more"></span>
-<p>本文三个部分：基础概念、工作原理、Shaders和GLSL</p>
-<h2 id="WebGL基础概念"><a href="#WebGL基础概念" class="headerlink" title="WebGL基础概念"></a>WebGL基础概念</h2><p>WebGL通常被认为是3D API，可以用来做一些很酷炫的3D的东西，实际上，它只是一个光栅化引擎，根据提供的点、线、三角形进行图形的绘制。它是在GPU中运行，因此相对来说运行速度会比较快(只要GPU性能够)。</p>
-<p>WebGL的代码有2个部分组成：顶点着色器(vertex shader)和片元着色器(fragment shader)，shader使用一种强类型语言——GLSL语言来完成,一组vertex shader和fragment shader组成Program,一个Web应用中可能会有多个Program.关系大致如图所示：<br><img src="https://hotpot.lightmao.cn/usr/uploads/2022/08/2828327738.png"></p>
-<h3 id="两个着色器"><a href="#两个着色器" class="headerlink" title="两个着色器"></a>两个着色器</h3><h4 id="顶点着色器"><a href="#顶点着色器" class="headerlink" title="顶点着色器"></a>顶点着色器</h4><p>顶点着色器(Vertex shader)负责进行坐标转换，输出顶点的坐标，坐标范围[-1,1]。<br>一个顶点着色器的工作是生成裁剪空间坐标值，通常是以下的形式</p>
-<pre class="line-numbers language-none"><code class="language-none">void main() &#123;
-   gl_Position &#x3D; doMathToMakeClipspaceCoordinates
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-<p>每个顶点调用一次（顶点）着色器，每次调用都需要设置一个特殊的全局变量<code>gl_Position</code>，该变量的值就是裁减空间坐标值(Clip Space Coordinates)。</p>
-<blockquote>
-<p>注:这里的Clip Space Coordinates的翻译感觉不是很好。</p>
-</blockquote>
-<p>顶点着色器需要的数据，可以通过以下三种方式获得。</p>
-<ol>
-<li>[Attributes 属性](# attributes-) (从缓冲中获取的数据)</li>
-<li>[Uniforms 全局变量](# uniforms-) (在一次绘制中对所有顶点保持一致值)</li>
-<li>[Textures 纹理](# textures-) (从像素或纹理元素中获取的数据)</li>
-</ol>
-<h4 id="片元着色器"><a href="#片元着色器" class="headerlink" title="片元着色器"></a>片元着色器</h4><p>片元着色器(Fragment shader)负责计算颜色，输出像素的颜色。<br>一个片元着色器的工作是为当前光栅化的像素提供颜色值，通常是以下的形式</p>
-<pre class="line-numbers language-none"><code class="language-none">precision mediump float;
-
-void main() &#123;
-   gl_FragColor &#x3D; doMathToMakeAColor;
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>每个像素都将调用一次片断着色器，每次调用需要从你设置的特殊全局变量<code>gl_FragColor</code>中获取颜色信息。</p>
-<p>片断着色器所需的数据，可以通过以下三种方式获取：</p>
-<ol>
-<li>[Uniforms 全局变量](# uniforms-) (values that stay the same for every pixel of a single draw call)</li>
-<li>[Textures 纹理](# textures-) (data from pixels&#x2F;texels)</li>
-<li>[Varyings 可变量](# varyings-) (data passed from the vertex shader and interpolated)</li>
-</ol>
-<h3 id="两类着色器中的参数-变量-的关键词"><a href="#两类着色器中的参数-变量-的关键词" class="headerlink" title="两类着色器中的参数(变量)的关键词"></a>两类着色器中的参数(变量)的关键词</h3><h4 id="Attributes-and-Buffers"><a href="#Attributes-and-Buffers" class="headerlink" title="Attributes and Buffers"></a>Attributes and Buffers</h4><p>Buffer是发送到GPU的一些二进制数据序列，通常情况下缓冲数据包括位置，法向量，纹理坐标，顶点颜色值等。<br>你可以存储任何数据。</p>
-<p>Arribute用来指明怎么从缓冲中获取所需数据并将它提供给顶点着色器。</p>
-<p>最常用的方法是缓冲和<strong>属性</strong>，在<a href="webgl-how-it-works.html">工作原理</a><br>中讲到了缓冲和属性，你可以创建缓冲，</p>
-<pre class="line-numbers language-none"><code class="language-none">var buf &#x3D; gl.createBuffer();<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>将数据存入缓冲</p>
-<pre class="line-numbers language-none"><code class="language-none">gl.bindBuffer(gl.ARRAY_BUFFER, buf);
-gl.bufferData(gl.ARRAY_BUFFER, someData, gl.STATIC_DRAW);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<p>然后初始化的时候，在你制作的（着色）程序中找到属性所在地址</p>
-<pre class="line-numbers language-none"><code class="language-none">var positionLoc &#x3D; gl.getAttribLocation(someShaderProgram, &quot;a_position&quot;);<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>在渲染的时候告诉WebGL怎么从缓冲中获取数据传递给属性</p>
-<pre class="line-numbers language-none"><code class="language-none">&#x2F;&#x2F; 开启从缓冲中获取数据
-gl.enableVertexAttribArray(positionLoc);
-
-var numComponents &#x3D; 3;  &#x2F;&#x2F; (x, y, z)
-var type &#x3D; gl.FLOAT;    &#x2F;&#x2F; 32位浮点数据
-var normalize &#x3D; false;  &#x2F;&#x2F; 不标准化
-var offset &#x3D; 0;         &#x2F;&#x2F; 从缓冲起始位置开始获取
-var stride &#x3D; 0;         &#x2F;&#x2F; 到下一个数据跳多少位内存
-                        &#x2F;&#x2F; 0 &#x3D; 使用当前的单位个数和单位长度 （ 3 * Float32Array.BYTES_PER_ELEMENT ）
-
-gl.vertexAttribPointer(positionLoc, numComponents, type, false, stride, offset);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>在<a href="webgl-fundamentals.html">WebGL 基础概念</a>中示范了不做任何运算直接将数据传递给<code>gl_Position</code>。</p>
-<pre class="line-numbers language-none"><code class="language-none">attribute vec4 a_position;
-
-void main() &#123;
-   gl_Position &#x3D; a_position;
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>如果缓冲中存的是裁剪空间坐标就没什么问题。</p>
-<p>属性可以用 <code>float</code>, <code>vec2</code>, <code>vec3</code>, <code>vec4</code>, <code>mat2</code>, <code>mat3</code> 和 <code>mat4</code> 数据类型。</p>
-<p>vec4:向量：vec4 a &#x3D; vec4(1, 2, 3, 4);<br>mat2:2x2矩阵</p>
-<h4 id="Uniforms"><a href="#Uniforms" class="headerlink" title="Uniforms"></a>Uniforms</h4><p>全局变量，在着色程序运行前设置</p>
-<h4 id="Textures"><a href="#Textures" class="headerlink" title="Textures"></a>Textures</h4><p>着色程序运行时可随意读取其中的数据，为数组类型，通常里面存放的是图片，当然也可以只放颜色。</p>
-<h4 id="Varyings"><a href="#Varyings" class="headerlink" title="Varyings"></a>Varyings</h4><p>顶点着色器如果需要给片元着色器传递数据，那么可以使用它。<br>为了使用可变量，要在两个着色器中定义同名的可变量。<br>给顶点着色器中可变量设置的值，会作为参考值进行内插，在绘制像素时传给片断着色器的可变量。</p>
-<h2 id="WebGL工作原理"><a href="#WebGL工作原理" class="headerlink" title="WebGL工作原理"></a>WebGL工作原理</h2><p>WebGL在GPU上的工作基本上分为2个部分， 第一部分将顶点坐标转到到Clip space vertices,第二部分就是基于坐标绘制像素。<br>这里有一个简单的例子：<br>假设你正在画三角形，顶点着色器每完成三次顶点处理，WebGL就会用这三个顶点画一个三角形。它计算出这三个顶点对应的像素后，就会光栅化这个三角形，“光栅化”其实就是“用像素画出来”的花哨叫法。对于每一个像素，它会调用你的片断着色器询问你使用什么颜色。你通过给片断着色器的一个特殊变量<code>gl_FragColor</code>设置一个颜色值，实现自定义像素颜色。</p>
-<p>WebGL先获得顶点着色器中计算的三个颜色值，在光栅化三角形时将会根据这三个值进行插值。每一个像素在调用片断着色器时，可变量的值是与之对应的插值。想要给片断着色器传值，我们可以先把值传递给顶点着色器(varyings)然后再传给片断着色器。<br>这里有一张来自OpenGL的图形管线的图，大致的描述了如何从顶点坐标到渲染到屏幕的过程：</p>
-<p><img src="https://hotpot.lightmao.cn/usr/uploads/2022/08/416715407.png"></p>
-<p>可阅读文章:<a target="_blank" rel="noopener" href="https://duriansoftware.com/joe/an-intro-to-modern-opengl.-chapter-1:-the-graphics-pipeline">现代OpenGL简介</a></p>
-<h2 id="GLSL"><a href="#GLSL" class="headerlink" title="GLSL"></a>GLSL</h2><h3 id="GLSL简介"><a href="#GLSL简介" class="headerlink" title="GLSL简介"></a>GLSL简介</h3><p>GLSL全称是 Graphics Library Shader Language （图形库着色器语言），是着色器使用的语言。它有一些不同于JavaScript的特性，主要目的是为栅格化图形提供常用的计算功能。所以它内建的数据类型例如<code>vec2</code>, <code>vec3</code>和 <code>vec4</code>分别代表两个值，三个值和四个值，<br>类似的还有<code>mat2</code>, <code>mat3</code> 和 <code>mat4</code> 分别代表 2x2, 3x3 和 4x4 矩阵。<br>你可以做一些运算例如常量和矢量的乘法。</p>
-<pre class="line-numbers language-none"><code class="language-none">vec4 a &#x3D; vec4(1, 2, 3, 4);<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>关于矩阵的计算和变换，有专门的库实现，如<a target="_blank" rel="noopener" href="https://glmatrix.net/">glmatrix</a>,在此之前，可把线性代数部分熟悉一下。</p>
-<h3 id="如何在js中使用glsl"><a href="#如何在js中使用glsl" class="headerlink" title="如何在js中使用glsl"></a>如何在js中使用glsl</h3><p>大致有两种方法：<br>1、js的script标签改为nojs或顶点片元着色器标记，如：</p>
-<pre class="line-numbers language-none"><code class="language-none">&lt;script id&#x3D;&quot;vertexShader&quot; type&#x3D;&quot;x-shader&#x2F;x-vertex&quot;&gt;
-&lt;&#x2F;script&gt;
-&lt;script id&#x3D;&quot;fragmentShader&quot; type&#x3D;&quot;x-shader&#x2F;x-fragment&quot;&gt;
-&lt;&#x2F;script&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-<p>2.直接使用字符串拼接的形式加载</p>
-<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>WebGL的全部内容就是创建不同的着色器，向着色器提供数据然后调用<code>gl.drawArrays</code>或 <code>gl.drawElements</code>让WebGL调用当前顶点着色器处理每个顶点，调用当前片断着色器渲染每个像素。<br>实际上创建着色器需要为数不多的几行代码，并且在大多数WebGL应用程序中都相似，因此一旦写完几乎可以不再关心它们了。<a href="webgl-boilerplate.html">在这里介绍如何编译GLSL并链接到着色程序</a>。<br>至此，WebGL的基础概念部分就到此结束了，后面的内容大部分都是介绍API相关的，如有兴趣，可继续在<a target="_blank" rel="noopener" href="https://webglfundamentals.org/">webglfundamentals</a>学习。</p>
-<h2 id="Referenced"><a href="#Referenced" class="headerlink" title="Referenced"></a>Referenced</h2><p><a target="_blank" rel="noopener" href="https://alisonmarket.lofter.com/post/2b1789_1c808c676">封面图</a></p>
+<h2 id="OpenGL-And-OpenGL-ES"><a href="#OpenGL-And-OpenGL-ES" class="headerlink" title="OpenGL And OpenGL ES"></a>OpenGL And OpenGL ES</h2><p>OpenGL 就是 GPU 驱动 的一套标准接口;<br>OpenGL ES 为嵌入式设备 GPU 驱动（如手机）的标准接口， 全称：OpenGL for Embedded Systems,它是OpenGL的子集。</p>
+<p>OpenGL 是可跨平台使用的 API，移动端使用 OpenGL ES 作为图形 API，苹果在 2014 年推出了 Metal 作为图形 API，但它们的一些专业名词、渲染过程等都是一样的。</p>
+<p>无论是OpenGL、OpenGL ES、Metal的本质都是利用GPU芯片来实现高效的渲染图像，我们可以利用这些API操控GPU去完成我们想做的事,如：<br>1、游戏开发：游戏的场景、人物的渲染，这些都是由引擎去做的。<br>2、音视频开发：视频解码后变成了二进制数据，利用OpenGL将这些数据渲染到屏幕。<br>3、地图开发：地图引擎对地图数据的渲染<br>4、动画开发：实现动画的绘制<br>5、视频处理：视频滤镜开发</p>
+<p>这两者之间最大差别就是<strong>两者应用场景不一样</strong>，一个是计算机，一个是移动或嵌入式设备。<br>这种差别体现在两个方面：<br>1、 <strong>窗口系统不一样。<br><strong>OpenGL ES 是一个平台中立的图形库，在它能够工作之前，需要于一个实际的窗口系统关联起来，这一点 OpenGL 也是一样的。<br>但是 <strong>OpenGL 时代在不同平台上有不同的机制一关联窗口系统，</strong>在 Windows上是wgl，在X-Window上市 xgl ,在 Apple OS 上是 agl 等。<br>而嵌入式市场的平台种类不计其数，单是学习各家手机操作系统的接口就是很大负担了，更不用说致力于支持各种尺寸平台的软件开发者，</strong>所以OpenGL ES 提供了Window Surface的抽象，使得移植工作基本可以局限在重新实现一下建立窗口的过程</strong>。<br>这个窗口工具是 EGL, 全称: <strong>embedded Graphic Interface</strong>,是 <strong>OpenGL ES 和底层 Native 平台 视窗系统之间的接口</strong>。<br>2、功能规模不一样。<br>嵌入式设备和移动设备追求的是高性能，<strong>因此 OpenGL ES 相对OpenGL 删减了一切低效能的操作方式</strong>，有高性能的决不留低效能的，即只求效能不求兼容性(和苹果的作风类似)。</p>
+<h2 id="WebGL"><a href="#WebGL" class="headerlink" title="WebGL"></a>WebGL</h2><p>WebGL，是一项用来<strong>在网页上绘制和渲染复杂三维图形（3D图形），并允许用户与之交互的技术。</strong>随着个人计算机和浏览器的性能越来越强，我们能够在Web上创建越来越精美、越来越复杂的3D图形。从传统意义上来说，为了显示三维图形，开发者需要使用 C 或 C++ 语言，辅以专门的计算机图形库，如OpenGL或Direct3D，来开发一个独立的应用程序。现在<strong>有了 WebGL，我们只需要向已经熟悉的 HTML 和 JS 中添加一些额外的三维图形学的代码</strong>，就可以在网页上显示三维图形了。<strong>WebGL 是内嵌在浏览器中的，不必安装插件和库就可以直接使用它</strong>。</p>
+<h2 id="三者之间的关系"><a href="#三者之间的关系" class="headerlink" title="三者之间的关系"></a>三者之间的关系</h2><p>OpenGL ES 可以说是 OpenGL 为了满足嵌入式设备需求而开发一个特殊版本，是其一个子集；而 <strong>WebGL，是为了网页渲染效果，将 JavaScript 和 OpenGL ES 2.0 结合在一起，通过增加 OpenGL ES 2.0 的一个JavaScript绑定得到</strong>。<br>基本关系如下:<br><img src="/2022/08/28/webgl-xi-lie-zhi-yi-opengl-vs.webgl/2967495361.png"></p>
+<p>在实际应用过程中，前端的 <strong>WebGL 是通过 JS 语句，操作本地的OpenGL的部分接口，</strong>对于移动设备这是操作OpenGL ES的接口，来实现页面的图形的渲染，WebGL只是绑定外面接口的一层，内部的一些核心内容，如着色器，材质，灯光等都是需要借助 GLSL 语法来操作的。</p>
+<p>三者之间的版本关系:</p>
+<p><img src="/2022/08/28/webgl-xi-lie-zhi-yi-opengl-vs.webgl/2524471132.png"></p>
+<h2 id="三者之间的区别"><a href="#三者之间的区别" class="headerlink" title="三者之间的区别"></a>三者之间的区别</h2><p><strong>WebGL 与其他 OpenGL 最大差别就是其可以通过 HTML 脚本本身实现 Web 交互式三维动画的制作，无需任何浏览器插件支持。</strong>至于OpenGL ES和OpenGL之间的区别见本文第一节OpenGL And OpenGL ES。</p>
+<h2 id="Referenced"><a href="#Referenced" class="headerlink" title="Referenced"></a>Referenced</h2><p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/8a246e01a534">OpenGL&#x2F;OpenGL ES（一）基础知识</a><br><a target="_blank" rel="noopener" href="https://duriansoftware.com/joe/an-intro-to-modern-opengl.-chapter-1:-the-graphics-pipeline">An intro to modern OpenGL. Chapter 1: The Graphics Pipeline</a><br><a target="_blank" rel="noopener" href="https://melare.lofter.com/post/1f010e23_1c71032c6">封面</a></p>
 
                 
             </div>
@@ -447,7 +379,7 @@ void main() &#123;
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://shenmamuniu.github.io/2022/08/28/138/">https://shenmamuniu.github.io/2022/08/28/138/</a>
+                    <a href="https://shenmamuniu.github.io/2022/08/28/webgl-xi-lie-zhi-yi-opengl-vs.webgl/">https://shenmamuniu.github.io/2022/08/28/webgl-xi-lie-zhi-yi-opengl-vs.webgl/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -569,19 +501,19 @@ void main() &#123;
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2022/08/28/139/">
+                <a href="/2022/08/28/webgl-xi-lie-zhi-er-ji-chu-gai-nian/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="WebGL系列之三：ThreeJS webgl or CesiumJS Webgl">
+                        <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="WebGL系列之二：基础概念">
                         
-                        <span class="card-title">WebGL系列之三：ThreeJS webgl or CesiumJS Webgl</span>
+                        <span class="card-title">WebGL系列之二：基础概念</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            本文主要是来自cesium论坛的一个回答，问题是CesiumJS的shader是否和ThreejS中的兼容。
+                            本文来自网站webglfundamentals的前三节内容。
                         
                     </div>
                     <div class="publish-info">
@@ -618,31 +550,31 @@ void main() &#123;
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2022/08/28/135/">
+                <a href="/2022/08/22/132/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/9.jpg" class="responsive-img" alt="WebGL系列之一：OpenGL vs. WebGL">
+                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="使用POSTGIS的ST_Value函数查询栅格值">
                         
-                        <span class="card-title">WebGL系列之一：OpenGL vs. WebGL</span>
+                        <span class="card-title">使用POSTGIS的ST_Value函数查询栅格值</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            本文主要介绍WebGL的起源，同OpenGL、OpenGL ES之间的关系。
+                            之前查询dem值时，一直是在ArcServer发布DEM数据，然后通过调用服务的Identify方法来查询的,但由于ArcServer过于庞大,因此考虑用其它方法来替代，这里使用PostGIS的ST_Value函数来进行栅格的查询。
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-08-28
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-08-22
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E5%9B%BE%E5%BD%A2%E5%9B%BE%E5%83%8F/" class="post-category">
-                                    图形图像
+                            <a href="/categories/Python/" class="post-category">
+                                    Python
                                 </a>
                             
                             
@@ -652,8 +584,12 @@ void main() &#123;
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/WebGL/">
-                        <span class="chip bg-color">WebGL</span>
+                    <a href="/tags/postgis/">
+                        <span class="chip bg-color">postgis</span>
+                    </a>
+                    
+                    <a href="/tags/%E7%A9%BA%E9%97%B4%E6%95%B0%E6%8D%AE%E5%BA%93/">
+                        <span class="chip bg-color">空间数据库</span>
                     </a>
                     
                 </div>
