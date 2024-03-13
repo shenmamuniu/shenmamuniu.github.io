@@ -281,7 +281,7 @@ nav {
 
 header .nav-transparent {
     background-color: transparent !important;
-    background-image: none;
+    /* background-image: none; */
     box-shadow: none;
 }
 
@@ -292,7 +292,7 @@ header nav .brand-span {
 header .brand-logo .logo-img {
     height: 45px;
     vertical-align: middle;
-    padding-bottom: 6px;
+    padding-bottom: 0px;
 }
 
 header .brand-logo .logo-span {
@@ -686,7 +686,7 @@ header .go-back i {
 }
 
 .index-card {
-    margin-top: -10px;
+    margin-top: -84px;
     padding-top: 20px;
 }
 
@@ -2293,4 +2293,7 @@ body.DarkMode .theme-btn:hover {
     font-family:'Font Awesome 5 Free';
     font-weight: 900;
     color: #d9534f;
+}
+.content{
+    margin-top:80px;
 }

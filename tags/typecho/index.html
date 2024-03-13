@@ -45,8 +45,6 @@
 
 
     
-        <link rel="stylesheet" type="text/css" href="/css/reward.css">
-    
 
 
 
@@ -62,7 +60,8 @@
             <div class="brand-logo">
                 <a href="/" class="waves-effect waves-light">
                     
-                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+                    <!-- <img src="/medias/logo.png" class="logo-img" alt="LOGO"> -->
                     
                     <span class="logo-span">神马木牛</span>
                 </a>
@@ -223,7 +222,7 @@
 
 </header>
 
-    <div class="bg-cover pd-header about-cover">
+    <div class="bg-cover pd-header about-cover" style="display:none;">
     <div class="container">
     <div class="row">
     <div class="col s10 offset-s1 m8 offset-m2 l8 offset-l2">
@@ -262,9 +261,7 @@
 
 
 <script>
-    // 每天切换 banner 图.  Switch banner image every day.
-    var bannerUrl = "/medias/banner/" + new Date().getDay() + '.jpg';
-    $('.bg-cover').css('background-image', 'url(' + bannerUrl + ')');
+    $('.bg-cover').css('background-image', 'url(/medias/banner/0.jpg)');
 </script>
 
 
@@ -1383,6 +1380,8 @@ $(function () {
     
 
     
+    <script type="text/javascript" src="/libs/background/ribbon-dynamic.js" async="async"></script>
+    
 
     
     <script src="/libs/instantpage/instantpage.js" type="module"></script>
@@ -1391,8 +1390,7 @@ $(function () {
 </body>
 
 </html>
-r $input = document.getElementById(search_id);
-                var $resultContent = document.getElementById(content_id);
+Id(content_id);
                 $input.addEventListener('input', function () {
                     var str = '<ul class=\"search-result-list\">';
                     var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
@@ -1535,6 +1533,8 @@ r $input = document.getElementById(search_id);
 
     
 
+    
+    <script type="text/javascript" src="/libs/background/ribbon-dynamic.js" async="async"></script>
     
 
     

@@ -45,8 +45,6 @@
 
 
     
-        <link rel="stylesheet" type="text/css" href="/css/reward.css">
-    
 
 
 
@@ -62,7 +60,8 @@
             <div class="brand-logo">
                 <a href="/" class="waves-effect waves-light">
                     
-                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+                    <!-- <img src="/medias/logo.png" class="logo-img" alt="LOGO"> -->
                     
                     <span class="logo-span">神马木牛</span>
                 </a>
@@ -230,7 +229,7 @@
     }
 </style>
 
-<div class="bg-cover pd-header about-cover">
+<div class="bg-cover pd-header about-cover" style="display:none;">
     <div class="container">
     <div class="row">
     <div class="col s10 offset-s1 m8 offset-m2 l8 offset-l2">
@@ -269,16 +268,14 @@
 
 
 <script>
-    // 每天切换 banner 图.  Switch banner image every day.
-    var bannerUrl = "/medias/banner/" + new Date().getDay() + '.jpg';
-    $('.bg-cover').css('background-image', 'url(' + bannerUrl + ')');
+    $('.bg-cover').css('background-image', 'url(/medias/banner/0.jpg)');
 </script>
 
 
     </div>
 </div>
 
-<main class="content">
+<main class="content" style="margin-top:160px;">
 
     <div id="aboutme" class="container about-container">
         <div class="card">
@@ -399,6 +396,33 @@
                 </div>
 
                 <div class="introduction center-align" data-aos="fade-up">If you wish to succeed, you should use persistence as your good friend, experience as your reference, prudence as your brother and hope as your sentry.</div>
+
+
+                  <!-- <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+                        <div class="content" itemprop="articleBody"> -->
+                                <!-- <h2 id="个人优势"><a href="#个人优势" class="headerlink" title="个人优势"></a>个人优势</h2><p>1、具有6年 GIS  项目开发经验，能够承担核心模块的设计与研发工作，完成高质量交付；<br>2、熟悉 Java、Python、C#等编程语言，能够开发高效的 GIS  应用和移动端产品；<br>3、拥有信息系统项目管理师的资质，曾带领了3~5人的开发团队。</p>
+<h2 id="工作经历"><a href="#工作经历" class="headerlink" title="工作经历"></a>工作经历</h2><h3 id="深圳市全数域科技有限公司-GIS工程师-2018-04-至今"><a href="#深圳市全数域科技有限公司-GIS工程师-2018-04-至今" class="headerlink" title="深圳市全数域科技有限公司 GIS工程师 2018.04~至今"></a>深圳市全数域科技有限公司 GIS工程师 2018.04~至今</h3><p>1.负责某地二三维一体平台的研发工作，实现 TB  级数据的管理及可视化展示，实现每日3千万实时轨迹数据的管理及入库<br>2.负责某地无人机数据管理平台的研发，实现无人机倾斜三维，720全景等的管理及展示</p>
+<h3 id="广州市城市建设工程监理有限公司-GIS工程师-2017-07-2018-04"><a href="#广州市城市建设工程监理有限公司-GIS工程师-2017-07-2018-04" class="headerlink" title="广州市城市建设工程监理有限公司 GIS工程师 2017.07~2018.04"></a>广州市城市建设工程监理有限公司 GIS工程师 2017.07~2018.04</h3><p>负责某市不动产数据的汇交平台的研发，实现每日上万 xml  报文的解析及处理</p>
+<h3 id="广软科技-GIS实习生-2016-7-2016-11"><a href="#广软科技-GIS实习生-2016-7-2016-11" class="headerlink" title="广软科技   GIS实习生   2016.7~2016.11"></a>广软科技   GIS实习生   2016.7~2016.11</h3><p>主要负责将公司现有基于Flex的GIS平台升级为基于ArcGIS平台</p>
+<h2 id="项目经历"><a href="#项目经历" class="headerlink" title="项目经历"></a>项目经历</h2><p>劳务实名制APP 技术负责人 2023.09~2024.02</p>
+<h3 id="江门市船舶防台指挥系统-GIS工程师-2023-03-2023-08"><a href="#江门市船舶防台指挥系统-GIS工程师-2023-03-2023-08" class="headerlink" title="江门市船舶防台指挥系统 GIS工程师 2023.03~2023.08"></a>江门市船舶防台指挥系统 GIS工程师 2023.03~2023.08</h3><p>该项目通过实时监测通过对台风分区分级、实时监测辖区内的船舶数量和类型，并对不合格的船舶进行筛选并高亮显示，辅助监管部门指挥调度。<br>我主要负责辖区船舶的实时展示以及船舶泊位分配算法的实现。</p>
+<h3 id="海陆一体空间信息管理平台"><a href="#海陆一体空间信息管理平台" class="headerlink" title="海陆一体空间信息管理平台"></a>海陆一体空间信息管理平台</h3><p>该项目以空间数据库为基础，集成陆域遥感影像、实景三维模型、水下地形、航海基础设施、水文气象、海洋地质等数据，具备水上水下三维场景显示、信息查询、空间量测、空间分析、航线定制、水文气象服务、船舶动态监测、实时水深加载等功能。<br>本人主要负责三维船舶的展示调度，船舶轨迹数据的存储及可视化等功能，实现了对上千条三维的实时流畅展示以及日均3000万轨迹数据的存储及快速查询等。</p>
+<h3 id="生态监测站点数据管理平台"><a href="#生态监测站点数据管理平台" class="headerlink" title="生态监测站点数据管理平台"></a>生态监测站点数据管理平台</h3><p>该项目通过利用无人机为水质监测站和大气监测站拍摄数据，形成全景影像、三维模型、高清照片、高清影像等四类数据。<br>我主要负责站点数据的分级展示，以及全景影像和三维数据的加载。</p>
+<p>1、2015.10~2015.12：离线地图数据下载工具：基于C#实现对在线地图瓦片数据的下载及存储加密研究；</p>
+<p>2、 2016.7~2016.8： 南海区阳光地图：主要负责地图模块的开发，基于ArcGIS JS API实现网络地图的加载、空间数据查询、热力图、聚合图等；基于Cordova实现移动端地图页面的适配。</p>
+<p>3、2016.12~2018.4: 广州市不动产数据汇交平台：主要负责数据的汇交工作。数据库使用Oracle及Postgresql，基于c#实现xml格式报文数据的重新封装，数据的定时接收及上传；</p>
+<p>4、2018.4~2019.6：天河区来穗人员信用管理平台：负责开发过程的整体把控工作，整个平台采用SpringBoot+MyBatis，涉及小程序开发、日志系统、系统监控、数据交换等；</p>
+<p>5、2019.7~2020.10：珠江口二三维海陆一体综合管理平台：平台基于Skyline进行二次开发，负责船舶的三维可视化，并基于TDEngine实现对船舶历史数据的存储；</p>
+<p>6、2020.10~2021.4：无人机智能巡检云平台：主要负责GIS模块及巡检视频智能识别模块，整体采用前后端分离架构，后端使用SpringCloud，前端采用Vue+Cesium;巡检视频识别模块使用python进行开发，基于tornado,运用rfbnet模型对无人机视频中的施工器械等进行实时识别。</p>
+<h2 id="相关技能"><a href="#相关技能" class="headerlink" title="相关技能"></a>相关技能</h2><p>1、熟悉GIS开发，含ArcGIS、leaflet、Cesium、Skyline等二三维开发框架；</p>
+<p>2、熟悉.NET、JAVA开发</p>
+<p>3、对移动端混合开发有一定的了解，含Cordova、Swift、Android等；</p>
+<p>4、熟悉常用的数据库:Mysql、Oracle、Redis等</p>
+<h2 id="教育经历"><a href="#教育经历" class="headerlink" title="教育经历"></a>教育经历</h2><p>华南农业大学 本科 地理信息科学(GIS)</p>
+<h2 id="资格证书"><a href="#资格证书" class="headerlink" title="资格证书"></a>资格证书</h2><p>信息系统项目管理师 网络工程师 英语六级</p>
+ -->
+                        <!-- </div>
+                    </article> -->
 
                 <style type="text/css">
     #posts-chart,
@@ -567,6 +591,58 @@
     tagsChart.setOption(tagsOption);
 </script>
 
+
+                
+                
+<div class="my-projects">
+    <div class="title center-align" data-aos="zoom-in-up">
+        <i class="fas fa-gift"></i>&nbsp;&nbsp;我的项目
+    </div>
+    <div class="row">
+        
+        
+        <div class="col s12 m6 l4" data-aos="fade-up">
+            <div class="info center-align">
+                <a href="http://github.com/blinkfox/hexo-theme-matery" class="icon"
+                   style="background: linear-gradient(to bottom right, #66BB6A 0%, #81C784 100%)" target="_blank">
+                    <i class="fas fa-file-alt"></i>
+                </a>
+                <div class="info-title">
+                    <a href="http://github.com/blinkfox/hexo-theme-matery" target="_blank">hexo-theme-matery</a>
+                </div>
+                <div class="info-desc">This is a Hexo blog theme with &#39;Material Design&#39; and responsive design.</div>
+            </div>
+        </div>
+        
+        <div class="col s12 m6 l4" data-aos="fade-up">
+            <div class="info center-align">
+                <a href="https://github.com/blinkfox/fenix" class="icon"
+                   style="background: linear-gradient(to bottom right, #F06292 0%, #EF5350 100%)" target="_blank">
+                    <i class="fas fa-database"></i>
+                </a>
+                <div class="info-title">
+                    <a href="https://github.com/blinkfox/fenix" target="_blank">Fenix</a>
+                </div>
+                <div class="info-desc">这是 Spring Data JPA 复杂或动态 SQL 查询的扩展库。</div>
+            </div>
+        </div>
+        
+        <div class="col s12 m6 l4" data-aos="fade-up">
+            <div class="info center-align">
+                <a href="https://github.com/blinkfox/typora-vue-theme" class="icon"
+                   style="background: linear-gradient(to bottom right, #29B6F6 0%, #1E88E5 100%)" target="_blank">
+                    <i class="fas fa-file-alt"></i>
+                </a>
+                <div class="info-title">
+                    <a href="https://github.com/blinkfox/typora-vue-theme" target="_blank">typora-vue-theme</a>
+                </div>
+                <div class="info-desc">This is a typora theme inspired by Vue document style.</div>
+            </div>
+        </div>
+        
+        
+    </div>
+</div>
 
                 
 
@@ -1247,7 +1323,10 @@
         </div>
     </div>
 </main>
+    
 
+   
+      
 
     <footer class="page-footer bg-color">
     
@@ -1480,6 +1559,8 @@ $(function () {
 
     
 
+    
+    <script type="text/javascript" src="/libs/background/ribbon-dynamic.js" async="async"></script>
     
 
     
