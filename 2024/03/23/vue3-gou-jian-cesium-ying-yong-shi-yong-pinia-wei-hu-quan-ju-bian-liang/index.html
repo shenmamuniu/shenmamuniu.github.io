@@ -4,10 +4,12 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Intellij idea创建Java小工具, 神马木牛">
-    <meta name="description" content="本文主要将如何使用Intellij Idea如何创建简单的小黑窗项目。
+    <meta name="keywords" content="Vue3构建Cesium应用:使用Pinia维护全局变量, 神马木牛">
+    <meta name="description" content="本文主要介绍如何使用Pinia集中管理全局变量，当然还是主要在Cesium中的应用。
 
-一、背景打的jar包执行时报错因为之前做的是.NET开发，可以使用Visual Studio创建控制台项目，到了JAVA这里，直接就是MyEclipse以及Intel">
+
+前面我们使用了依赖注入来向子组件传递viewer对象，本文我们则通过Pinia存储viewer对象，供所有组件使用。
+安装与注册PiniaPinia ">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -19,7 +21,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Intellij idea创建Java小工具 | 神马木牛</title>
+    <title>Vue3构建Cesium应用:使用Pinia维护全局变量 | 神马木牛</title>
     <link rel="icon" type="image/png" href="/favicon.png">
     
 
@@ -268,7 +270,7 @@
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Intellij idea创建Java小工具</h1>
+                    <h1 class="description center-align post-title">Vue3构建Cesium应用:使用Pinia维护全局变量</h1>
                 </div>
             </div>
         </div>
@@ -292,8 +294,12 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/Java/">
-                                <span class="chip bg-color">Java</span>
+                            <a href="/tags/Cesium/">
+                                <span class="chip bg-color">Cesium</span>
+                            </a>
+                        
+                            <a href="/tags/Vue3/">
+                                <span class="chip bg-color">Vue3</span>
                             </a>
                         
                     </div>
@@ -304,8 +310,12 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E8%AF%AD%E8%A8%80/" class="post-category">
-                                语言
+                            <a href="/categories/Cesium/" class="post-category">
+                                Cesium
+                            </a>
+                        
+                            <a href="/categories/Cesium/Vue3/" class="post-category">
+                                Vue3
                             </a>
                         
                     </div>
@@ -317,28 +327,28 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2019-12-27
+                    2024-03-23
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2019-12-27
+                    2024-03-23
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    165
+                    593
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    1 分
+                    2 分
                 </div>
                 
 
@@ -361,14 +371,71 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>本文主要将如何使用Intellij Idea如何创建简单的小黑窗项目。</p>
+                <p>本文主要介绍如何使用Pinia集中管理全局变量，当然还是主要在Cesium中的应用。</p>
 <span id="more"></span>
-<h2 id="一、背景"><a href="#一、背景" class="headerlink" title="一、背景"></a>一、背景</h2><h3 id="打的jar包执行时报错"><a href="#打的jar包执行时报错" class="headerlink" title="打的jar包执行时报错"></a>打的jar包执行时报错</h3><p>因为之前做的是.NET开发，可以使用Visual Studio创建控制台项目，到了JAVA这里，直接就是MyEclipse以及Intellij Idea做的Web项目，对Java中类似的“控制台项目”缺少了解，于是就出现了问题： Invalid or corrupt jarfile xxx.jar。</p>
-<h3 id="项目创建过程"><a href="#项目创建过程" class="headerlink" title="项目创建过程"></a>项目创建过程</h3><p>New Project —&gt;Maven…</p>
-<h2 id="二、Intellij-Idea创建小黑窗项目"><a href="#二、Intellij-Idea创建小黑窗项目" class="headerlink" title="二、Intellij Idea创建小黑窗项目"></a>二、Intellij Idea创建小黑窗项目</h2><h3 id="创建项目"><a href="#创建项目" class="headerlink" title="创建项目"></a>创建项目</h3><p><strong>New Project —&gt;Java—&gt;Command Line App</strong></p>
-<h3 id="配置artifacts"><a href="#配置artifacts" class="headerlink" title="配置artifacts"></a>配置artifacts</h3><p><strong>File—&gt;Project Settings-&gt;Artifacts</strong><br>添加jar即可，记得设置下Main Class</p>
-<h3 id="运行jar包"><a href="#运行jar包" class="headerlink" title="运行jar包"></a>运行jar包</h3><p>java -jar xxx.jar</p>
-<h2 id="Referenced"><a href="#Referenced" class="headerlink" title="Referenced"></a>Referenced</h2><p><a target="_blank" rel="noopener" href="https://huadou145.lofter.com/post/205d4db3_1c7474e60">1、封面图</a></p>
+
+<p>前面我们使用了依赖注入来向子组件传递viewer对象，本文我们则通过Pinia存储viewer对象，供所有组件使用。</p>
+<h2 id="安装与注册Pinia"><a href="#安装与注册Pinia" class="headerlink" title="安装与注册Pinia"></a>安装与注册Pinia</h2><p>Pinia 是 Vue 的专属状态管理库，它允许你跨组件或页面共享状态。</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">pnpm install pinia<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>在<code>main.js</code>中创建Pinia实例并使用<code>app.use(pinia)</code>注册</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">import</span> <span class="token punctuation">&#123;</span> createPinia <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'pinia'</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> pinia <span class="token operator">=</span> <span class="token function">createPinia</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+app<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span>pinia<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="定义Store"><a href="#定义Store" class="headerlink" title="定义Store"></a>定义Store</h2><p>创建stores&#x2F;global.js文件，并使用<code>defineStore</code>定义store，包括<code>state</code>, <code>getters</code>, 和 <code>actions</code>。</p>
+<p>其中state中定义变量；actions中定义更新state中的变量；</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">// store/global.js</span>
+<span class="token keyword">import</span> <span class="token punctuation">&#123;</span> defineStore <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'pinia'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">const</span> useGlobalStore <span class="token operator">=</span> <span class="token function">defineStore</span><span class="token punctuation">(</span><span class="token string">'global'</span><span class="token punctuation">,</span> <span class="token punctuation">&#123;</span>
+  <span class="token function-variable function">state</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+    <span class="token comment">// 定义全局状态</span>
+    <span class="token literal-property property">viewer</span><span class="token operator">:</span><span class="token keyword">null</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">getters</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">// 定义getters</span>
+    <span class="token function-variable function">doubleCount</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">state</span><span class="token punctuation">)</span> <span class="token operator">=></span> state<span class="token punctuation">.</span>count <span class="token operator">*</span> <span class="token number">2</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">actions</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+    <span class="token function">updateViewer</span><span class="token punctuation">(</span><span class="token parameter">_viewer</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span>viewer<span class="token operator">=</span>_viewer<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<blockquote>
+<p> 注意：以下父组件和子组件的名字描述可能有点问题，只是为了容易理解</p>
+</blockquote>
+<h2 id="在父组件中更新viewer的状态"><a href="#在父组件中更新viewer的状态" class="headerlink" title="在父组件中更新viewer的状态"></a>在父组件中更新viewer的状态</h2><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">import</span> <span class="token punctuation">&#123;</span> useGlobalStore <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'@/stores/global'</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> globalStore <span class="token operator">=</span> <span class="token function">useGlobalStore</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">let</span> viewer<span class="token operator">=</span><span class="token function">ref</span><span class="token punctuation">(</span><span class="token keyword">null</span><span class="token punctuation">)</span>
+<span class="token function">onMounted</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">=></span><span class="token punctuation">&#123;</span>
+    viewer<span class="token punctuation">.</span>value <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Cesium<span class="token punctuation">.</span>Viewer</span><span class="token punctuation">(</span><span class="token string">"map"</span><span class="token punctuation">,</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    globalStore<span class="token punctuation">.</span><span class="token function">updateViewer</span><span class="token punctuation">(</span>viewer<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h2 id="子组件中使用state中的viewer"><a href="#子组件中使用state中的viewer" class="headerlink" title="子组件中使用state中的viewer"></a>子组件中使用state中的viewer</h2><p>由于viewer只有在页面挂载后才初始化，因此子组件中需要监听viewer：</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">import</span> <span class="token punctuation">&#123;</span> useGlobalStore <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'@/stores/global'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> myStore <span class="token operator">=</span> <span class="token function">useGlobalStore</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">let</span> viewer<span class="token operator">=</span><span class="token keyword">null</span><span class="token punctuation">;</span>
+<span class="token function">watch</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> myStore<span class="token punctuation">.</span>viewer<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">newValue<span class="token punctuation">,</span> oldValue</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+  viewer<span class="token operator">=</span>myStore<span class="token punctuation">.</span>viewer<span class="token punctuation">;</span>
+  <span class="token function">showRtCoords</span><span class="token punctuation">(</span>viewer<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>这里有2点需要注意：</p>
+<ol>
+<li>组件中访问store中的变量时，无需state.someState.value。这是因为Pinia内部已经为状态做了响应式处理。当你在<code>state</code>中返回一个对象时，Pinia会自动将其内部的属性转换为响应式引用。这意味着你可以直接通过状态名称访问它们，而无需<code>.value</code>。</li>
+<li>watch监听state变量时，要使用getter。因为Pinia的<code>state</code>中的属性是响应式的，但它们是响应式对象的属性值，而非独立的响应式引用。这与Vue 3的Composition API中的<code>ref</code>和<code>reactive</code>不同，其中你需要使用<code>.value</code>来访问和更新<code>ref</code>的响应式值。Pinia抽象了这一层，使得状态访问更加直观和简洁。</li>
+</ol>
+<blockquote>
+<p><strong>watch</strong>:  它可以是一个 ref (包括计算属性)、一个响应式对象、一个 getter 函数、或多个数据源组成的数组 ，但不能直接侦听响应式对象的属性值 。</p>
+</blockquote>
 
                 
             </div>
@@ -395,7 +462,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://shenmamuniu.github.io/2019/12/27/37/">https://shenmamuniu.github.io/2019/12/27/37/</a>
+                    <a href="https://shenmamuniu.github.io/2024/03/23/vue3-gou-jian-cesium-ying-yong-shi-yong-pinia-wei-hu-quan-ju-bian-liang/">https://shenmamuniu.github.io/2024/03/23/vue3-gou-jian-cesium-ying-yong-shi-yong-pinia-wei-hu-quan-ju-bian-liang/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -433,8 +500,12 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/Java/">
-                                    <span class="chip bg-color">Java</span>
+                                <a href="/tags/Cesium/">
+                                    <span class="chip bg-color">Cesium</span>
+                                </a>
+                            
+                                <a href="/tags/Vue3/">
+                                    <span class="chip bg-color">Vue3</span>
                                 </a>
                             
                         </div>
@@ -480,46 +551,56 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2020/01/17/39/">
+                <a href="/2024/03/23/vue3-gou-jian-cesium-ying-yong-shi-yong-pinia-wei-hu-quan-ju-bian-liang/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="windows下安装mysql免安装版">
+                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="Vue3构建Cesium应用:使用Pinia维护全局变量">
                         
-                        <span class="card-title">windows下安装mysql免安装版</span>
+                        <span class="card-title">Vue3构建Cesium应用:使用Pinia维护全局变量</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            本文主要介绍在windows下安装mysql免安装版本的具体过程。
+                            本文主要介绍如何使用Pinia集中管理全局变量，当然还是主要在Cesium中的应用。
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-01-17
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2024-03-23
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" class="post-category">
-                                    数据库
+                            <a href="/categories/Cesium/" class="post-category">
+                                    Cesium
+                                </a>
+                            
+                            <a href="/categories/Cesium/Vue3/" class="post-category">
+                                    Vue3
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Mysql/">
-                        <span class="chip bg-color">Mysql</span>
+                    <a href="/tags/Cesium/">
+                        <span class="chip bg-color">Cesium</span>
+                    </a>
+                    
+                    <a href="/tags/Vue3/">
+                        <span class="chip bg-color">Vue3</span>
                     </a>
                     
                 </div>
@@ -533,31 +614,35 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2019/12/23/35/">
+                <a href="/2024/03/23/vue3-gou-jian-cesium-ying-yong-provide-inject-zai-viewer-dui-xiang-chuan-di-zhong-de-ying-yong/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="jar文件没有主清单文件">
+                        <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="Vue3构建Cesium应用:Provide/Inject在Viewer对象传递中的应用">
                         
-                        <span class="card-title">jar文件没有主清单文件</span>
+                        <span class="card-title">Vue3构建Cesium应用:Provide/Inject在Viewer对象传递中的应用</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            jar文件没有主清单文件时，通过手动编辑MANIFEST.MF文件的方式使得jar文件正常运行。
+                            本文主要介绍Vue3中使用Cesium时，如何通过依赖注入将viewer对象传递给子组件。
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2019-12-23
+                                <i class="far fa-clock fa-fw icon-date"></i>2024-03-23
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E8%AF%AD%E8%A8%80/" class="post-category">
-                                    语言
+                            <a href="/categories/Cesium/" class="post-category">
+                                    Cesium
+                                </a>
+                            
+                            <a href="/categories/Cesium/Vue3/" class="post-category">
+                                    Vue3
                                 </a>
                             
                             
@@ -567,8 +652,12 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Java/">
-                        <span class="chip bg-color">Java</span>
+                    <a href="/tags/Cesium/">
+                        <span class="chip bg-color">Cesium</span>
+                    </a>
+                    
+                    <a href="/tags/Vue3/">
+                        <span class="chip bg-color">Vue3</span>
                     </a>
                     
                 </div>
