@@ -7,9 +7,9 @@
     <meta name="keywords" content="CentOS7安装MariaDB, 神马木牛">
     <meta name="description" content="最近在做数据迁移，顺便把mysql替换为mariadb.
 
-环境OS:centos 7.6Mariadb：10.5.9
+环境OS:centos 7.8Mariadb：10.5.9~11.x
 提示:关于mariadb的安装，网上有太多乱七八糟的教程了，最好的办法还是参考mariadb官网文档。
-软件下载wget">
+软件下">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -326,21 +326,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2021-04-20
+                    2024-04-08
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    525
+                    685
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    2 分
+                    3 分
                 </div>
                 
 
@@ -370,14 +370,22 @@
             <div id="articleContent">
                 <p>最近在做数据迁移，顺便把mysql替换为mariadb.</p>
 <span id="more"></span>
-<h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><p>OS:centos 7.6<br>Mariadb：10.5.9</p>
+<h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><p>OS:centos 7.8<br>Mariadb：10.5.9~11.x</p>
 <p><strong>提示</strong>:关于mariadb的安装，网上有太多乱七八糟的教程了，最好的办法还是参考mariadb官网文档。</p>
 <h2 id="软件下载"><a href="#软件下载" class="headerlink" title="软件下载"></a>软件下载</h2><pre class="line-numbers language-none"><code class="language-none">wget https:&#x2F;&#x2F;mirrors.cloud.tencent.com&#x2F;mariadb&#x2F;mariadb-10.5.9&#x2F;bintar-linux-systemd-x86_64&#x2F;mariadb-10.5.9-linux-systemd-x86_64.tar.gz<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <h2 id="删除已安装的mysql-or-mariadb"><a href="#删除已安装的mysql-or-mariadb" class="headerlink" title="删除已安装的mysql or mariadb"></a>删除已安装的mysql or mariadb</h2><p>这里不仅需要移除mariadb，如果有mysql,也要移除</p>
 <pre class="line-numbers language-none"><code class="language-none">rpm -qa | grep mariadb
 rpm -ev mariadb-libs-5.5.68-1.el7.x86_64 --nodeps
 find &#x2F; -name mysql # 删除查询出来的文件夹<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-<h2 id="创建用户和组"><a href="#创建用户和组" class="headerlink" title="创建用户和组"></a>创建用户和组</h2><pre class="line-numbers language-none"><code class="language-none">groupadd mysql
+<h2 id="创建用户和组"><a href="#创建用户和组" class="headerlink" title="创建用户和组"></a>创建用户和组</h2><p>创建数据库安装位置:</p>
+<pre class="line-numbers language-none"><code class="language-none">mkdir &#x2F;usr&#x2F;local&#x2F;mysql<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>然后把mariadb-10.5.9-linux-systemd-x86_64.tar.gz解压并拷贝到这个&#x2F;usr&#x2F;local&#x2F;mysql这个目录下:</p>
+<pre class="line-numbers language-cmd" data-language="cmd"><code class="language-cmd">tar -zxvf mariadb-10.5.9-linux-systemd-x86_64.tar.gz
+mv mariadb-10.5.9-linux-systemd-x86_64&#x2F;* &#x2F;usr&#x2F;local&#x2F;mysql<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<blockquote>
+<p>注：mv命令没有-R这个参数，cp命令有-R，用于递归地赋值目录及内容。</p>
+</blockquote>
+<pre class="line-numbers language-none"><code class="language-none">groupadd mysql
 useradd -r -g mysql mysql
 chown -R mysql:mysql &#x2F;usr&#x2F;local&#x2F;mysql<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
@@ -429,17 +437,23 @@ innodb_log_file_size &#x3D; 170M
 innodb_lock_wait_timeout &#x3D; 60
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h2 id="数据库初始化"><a href="#数据库初始化" class="headerlink" title="数据库初始化"></a>数据库初始化</h2><pre class="line-numbers language-none"><code class="language-none">.&#x2F;scripts&#x2F;mysql_install_db --user&#x3D;mysql
+<h2 id="数据库初始化"><a href="#数据库初始化" class="headerlink" title="数据库初始化"></a>数据库初始化</h2><p>切换到&#x2F;usr&#x2F;local&#x2F;mysql目录下:</p>
+<pre class="line-numbers language-none"><code class="language-none">cd &#x2F;usr&#x2F;local&#x2F;mysql
+.&#x2F;scripts&#x2F;mysql_install_db --user&#x3D;mysql
 
 # 启动
 .&#x2F;bin&#x2F;mysqld_safe --user&#x3D;mysql &amp;
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h2 id="配置开机启动"><a href="#配置开机启动" class="headerlink" title="配置开机启动"></a>配置开机启动</h2><pre class="line-numbers language-none"><code class="language-none">cp &#x2F;usr&#x2F;local&#x2F;msyql&#x2F;support-files&#x2F;mysql.server &#x2F;etc&#x2F;init.d&#x2F;mysql
+<h2 id="配置开机启动"><a href="#配置开机启动" class="headerlink" title="配置开机启动"></a>配置开机启动</h2><pre class="line-numbers language-none"><code class="language-none">cd &#x2F;usr&#x2F;local&#x2F;msyql&#x2F;support-files
+cp mysql.server &#x2F;etc&#x2F;init.d&#x2F;mysql
 chmod 755 &#x2F;etc&#x2F;init.d&#x2F;mysql
 chkconfig --add mysql
-chkconfig --level 345 mysql on<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+chkconfig --level 345 mysql on<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
+<blockquote>
+<p>注:cp &#x2F;usr&#x2F;local&#x2F;msyql&#x2F;support-files&#x2F;mysql.server &#x2F;etc&#x2F;init.d&#x2F;mysql 这个命令可能提示找不到mysql.server这个文件</p>
+</blockquote>
 <h2 id="设置环境变量"><a href="#设置环境变量" class="headerlink" title="设置环境变量"></a>设置环境变量</h2><pre class="line-numbers language-none"><code class="language-none">export PATH&#x3D;&#x2F;usr&#x2F;local&#x2F;mysql&#x2F;bin:$PATH<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>service mysql start&#x2F;restart</p>
 <h2 id="设置用户"><a href="#设置用户" class="headerlink" title="设置用户"></a>设置用户</h2><pre class="line-numbers language-none"><code class="language-none">mysql&gt;grant all privileges on *.* to &#39;root&#39;@&#39;%&#39; identified by &#39;root&#39; WITH GRANT OPTION;;
@@ -792,7 +806,7 @@ mysql&gt;flush privileges;<span aria-hidden="true" class="line-numbers-rows"><sp
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">71.8k</span>
+                        class="white-color">72.1k</span>
             
             
             
