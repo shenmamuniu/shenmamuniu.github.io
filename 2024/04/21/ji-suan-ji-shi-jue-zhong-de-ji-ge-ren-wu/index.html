@@ -1,0 +1,1055 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="计算机视觉中的几个任务, 神马木牛">
+    <meta name="description" content="计算机视觉是一门研究如何使机器“看”的科学和技术，它涉及使机器能够自动地从图像或视频中理解、分析和解释视觉信息的过程。
+
+
+计算机视觉的目标是模拟人类视觉系统的功能，使机器能够感知和理解环境中的视觉内容，从而进行智能决策和执行各种任务。 
+">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>计算机视觉中的几个任务 | 神马木牛</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+    
+
+
+    <!-- bg-cover style     -->
+
+
+
+<link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+<link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+<link rel="stylesheet" type="text/css" href="/css/matery.css">
+<link rel="stylesheet" type="text/css" href="/css/my.css">
+<link rel="stylesheet" type="text/css" href="/css/dark.css" media="none" onload="if(media!='all')media='all'">
+
+
+
+
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+    <link rel="stylesheet" href="/css/post.css">
+
+
+
+
+    
+
+
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+                    <!-- <img src="/medias/logo.png" class="logo-img" alt="LOGO"> -->
+                    
+                    <span class="logo-span">神马木牛</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+  <li>
+    <a href="javascript:;" class="waves-effect waves-light" onclick="switchNightMode()" title="深色/浅色模式" >
+      <i id="sum-moon-icon" class="fas fa-sun" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">神马木牛</div>
+        <div class="logo-desc">
+            
+            Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+<script src="/libs/cryptojs/crypto-js.min.js"></script>
+<script>
+    (function() {
+        let pwd = '';
+        if (pwd && pwd.length > 0) {
+            if (pwd !== CryptoJS.SHA256(prompt('请输入访问本文章的密码')).toString(CryptoJS.enc.Hex)) {
+                alert('密码错误，将返回主页！');
+                location.href = '/';
+            }
+        }
+    })();
+</script>
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/18.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">计算机视觉中的几个任务</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/">
+                                <span class="chip bg-color">计算机视觉</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/" class="post-category">
+                                计算机视觉
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2024-04-21
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2024-04-21
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    2k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    6 分
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.min.css">
+        
+
+        
+        <!-- 代码块折行 -->
+        <style type="text/css">
+            code[class*="language-"], pre[class*="language-"] { white-space: pre-wrap !important; }
+        </style>
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <p>计算机视觉是一门研究如何使机器“看”的科学和技术，它涉及使机器能够自动地从图像或视频中理解、分析和解释视觉信息的过程。</p>
+<span id="more"></span>
+
+<p>计算机视觉的目标是模拟人类视觉系统的功能，使机器能够感知和理解环境中的视觉内容，从而进行智能决策和执行各种任务。 </p>
+<p>计算机视觉结合了计算机科学、人工智能、机器学习和图像处理等多个领域的知识和技术，是现代信息技术中的一个重要研究领域，具有广泛的应用前景和深远的社会影响。</p>
+<h1 id="主要组成部分"><a href="#主要组成部分" class="headerlink" title="主要组成部分"></a>主要组成部分</h1><ol>
+<li><p><strong>图像获取</strong>：使用摄像头或其他设备从现实世界中捕获图像或视频。</p>
+</li>
+<li><p><strong>预处理和图像增强</strong>：对原始图像进行预处理，如去噪、增强对比度等，以改善图像质量。</p>
+</li>
+<li><p><strong>特征提取</strong>：从图像中提取有用的特征或模式，这些特征可以帮助识别、分类或定位对象。</p>
+</li>
+<li><p><strong>图像分析和解释</strong>：使用机器学习和深度学习算法对图像进行分析和解释，以实现各种视觉任务，如图像分类、目标检测、人脸识别、物体跟踪、场景分割等。</p>
+</li>
+<li><p><strong>应用和决策</strong>：根据图像分析的结果进行决策或执行特定的任务，如自动驾驶、机器人导航、安全监控、医学图像分析等。</p>
+</li>
+</ol>
+<h1 id="主要应用领域"><a href="#主要应用领域" class="headerlink" title="主要应用领域"></a>主要应用领域</h1><ul>
+<li><p><strong>安全监控</strong>：视频监控、入侵检测、人脸识别。</p>
+</li>
+<li><p><strong>自动驾驶</strong>：道路检测、障碍物识别、行人检测。</p>
+</li>
+<li><p><strong>医疗图像分析</strong>：医学影像识别、疾病检测、图像诊断。</p>
+</li>
+<li><p><strong>工业检测和质量控制</strong>：产品检测、缺陷检测、自动分类。</p>
+</li>
+<li><p><strong>增强现实和虚拟现实</strong>：交互式体验、模拟和仿真、虚拟导航。</p>
+</li>
+</ul>
+<h1 id="主要任务"><a href="#主要任务" class="headerlink" title="主要任务"></a>主要任务</h1><h2 id="1-图像分类-Image-Classification"><a href="#1-图像分类-Image-Classification" class="headerlink" title="1. 图像分类 (Image Classification)"></a>1. 图像分类 (Image Classification)</h2><ul>
+<li><strong>任务描述</strong>：将输入图像分配到预定义的类别或标签中。</li>
+<li><strong>应用场景</strong>：例如，识别图像中的动物、交通标志、食物等。</li>
+</ul>
+<h2 id="2-目标检测-Object-Detection"><a href="#2-目标检测-Object-Detection" class="headerlink" title="2. 目标检测 (Object Detection)"></a>2. 目标检测 (Object Detection)</h2><ul>
+<li><strong>任务描述</strong>：检测图像中的对象并确定它们的位置（通常使用边界框表示）。</li>
+<li><strong>应用场景</strong>：例如，检测图像中的人、车辆、动物等，并标注它们的位置。</li>
+</ul>
+<h2 id="3-实例分割-Instance-Segmentation"><a href="#3-实例分割-Instance-Segmentation" class="headerlink" title="3. 实例分割 (Instance Segmentation)"></a>3. 实例分割 (Instance Segmentation)</h2><ul>
+<li><strong>任务描述</strong>：不仅检测图像中的对象，还为每个对象的每个像素分配一个类别标签，从而区分不同对象的不同实例。</li>
+<li><strong>应用场景</strong>：例如，对图像中的多个物体进行精确的分割和分类。</li>
+</ul>
+<h2 id="4-语义分割-Semantic-Segmentation"><a href="#4-语义分割-Semantic-Segmentation" class="headerlink" title="4. 语义分割 (Semantic Segmentation)"></a>4. 语义分割 (Semantic Segmentation)</h2><ul>
+<li><strong>任务描述</strong>：为图像的每个像素分配一个类别标签，以表示该像素属于的对象类别。</li>
+<li><strong>应用场景</strong>：例如，将图像中的每个像素标记为天空、道路、建筑等类别。</li>
+</ul>
+<h2 id="5-图像生成-Image-Generation"><a href="#5-图像生成-Image-Generation" class="headerlink" title="5. 图像生成 (Image Generation)"></a>5. 图像生成 (Image Generation)</h2><ul>
+<li><strong>任务描述</strong>：生成新的图像，以模拟或扩展现有的视觉内容。</li>
+<li><strong>应用场景</strong>：例如，生成艺术作品、图像增强、数据增强等。</li>
+</ul>
+<h2 id="6-人脸识别和检测-Face-Recognition-and-Detection"><a href="#6-人脸识别和检测-Face-Recognition-and-Detection" class="headerlink" title="6. 人脸识别和检测 (Face Recognition and Detection)"></a>6. 人脸识别和检测 (Face Recognition and Detection)</h2><ul>
+<li><strong>任务描述</strong>：识别图像或视频中的人脸，并将其与已知的人脸进行匹配或验证。</li>
+<li><strong>应用场景</strong>：例如，身份验证、安全监控、社交媒体标签等。</li>
+</ul>
+<h2 id="7-姿态估计-Pose-Estimation"><a href="#7-姿态估计-Pose-Estimation" class="headerlink" title="7. 姿态估计 (Pose Estimation)"></a>7. 姿态估计 (Pose Estimation)</h2><ul>
+<li><strong>任务描述</strong>：检测图像或视频中的人体姿态和关节位置。</li>
+<li><strong>应用场景</strong>：例如，体育分析、健身指导、人机交互等。</li>
+</ul>
+<h2 id="8-图像分割和修复-Image-Segmentation-and-Inpainting"><a href="#8-图像分割和修复-Image-Segmentation-and-Inpainting" class="headerlink" title="8. 图像分割和修复 (Image Segmentation and Inpainting)"></a>8. 图像分割和修复 (Image Segmentation and Inpainting)</h2><ul>
+<li><strong>任务描述</strong>：分割图像中的对象并修复或填充缺失或损坏的区域。</li>
+<li><strong>应用场景</strong>：例如，图像修复、物体移除、艺术创作等。</li>
+</ul>
+<p>主要任务涵盖了计算机视觉的核心功能和应用领域，每个任务都有其独特的挑战和解决方案，通常需要结合深度学习、机器学习和传统图像处理技术来实现。</p>
+<h1 id="图像分类、目标检测、语义分割和实例分割"><a href="#图像分类、目标检测、语义分割和实例分割" class="headerlink" title="图像分类、目标检测、语义分割和实例分割"></a>图像分类、目标检测、语义分割和实例分割</h1><p>图像分类、目标检测、语义分割和实例分割都是计算机视觉中的核心概念，它们描述了不同的图像识别和分析任务。以下是这些概念的定义和它们之间的关系：</p>
+<h2 id="图像分类-Image-Classification-："><a href="#图像分类-Image-Classification-：" class="headerlink" title="**图像分类 (Image Classification)**："></a>**图像分类 (Image Classification)**：</h2><ul>
+<li><strong>定义</strong>：图像分类是将输入图像分配到预定义的类别或标签中的一个任务。通常，这是一个监督学习任务，其中算法需要从标记的图像数据集中学习。</li>
+</ul>
+<h2 id="目标检测-Object-Detection-："><a href="#目标检测-Object-Detection-：" class="headerlink" title="**目标检测 (Object Detection)**："></a>**目标检测 (Object Detection)**：</h2><ul>
+<li><p><strong>定义</strong>：目标检测不仅要识别图像中的对象，还要确定它们的位置。它会在图像中标记对象的边界框，并为每个边界框分配一个类别标签。通常，目标检测使用两步策略：首先检测图像中的候选对象区域（如使用区域提议网络），然后对这些区域进行分类。</p>
+</li>
+<li><p><strong>相关模型</strong>: Faster R-CNN、YOLO（You Only Look Once）或SSD（Single Shot Multibox Detector）。</p>
+</li>
+</ul>
+<h2 id="实例分割-Instance-Segmentation-："><a href="#实例分割-Instance-Segmentation-：" class="headerlink" title="**实例分割 (Instance Segmentation)**："></a>**实例分割 (Instance Segmentation)**：</h2><ul>
+<li><p><strong>定义</strong>：实例分割不仅要识别图像中的对象，还要为每个对象的每个像素分配一个类别标签，从而区分不同对象的不同实例。这意味着它不仅要标记对象的边界框，还要标记对象内部的像素。</p>
+</li>
+<li><p><strong>特点</strong>：</p>
+<ul>
+<li>对图像进行像素级别的分类。</li>
+<li>区分同一类别内的不同对象实例。</li>
+<li>通常用于复杂场景分析、物体检测与分割、自动驾驶等。</li>
+</ul>
+</li>
+<li><p><strong>相关模型</strong>: 如Mask R-CNN、DeepLabv3+或U-Net。</p>
+</li>
+</ul>
+<h2 id="语义分割-Semantic-Segmentation-："><a href="#语义分割-Semantic-Segmentation-：" class="headerlink" title="**语义分割 (Semantic Segmentation)**："></a>**语义分割 (Semantic Segmentation)**：</h2><ul>
+<li><p><strong>定义</strong>：语义分割是将图像的每个像素分类到预定义的类别中，但不区分不同对象的不同实例。这意味着所有同一类别的像素（如人、车、树等）都将被分配相同的标签，而不考虑它们是否属于同一个对象实例。</p>
+</li>
+<li><p><strong>特点</strong>：</p>
+<ul>
+<li>对图像进行像素级别的分类。</li>
+<li>不考虑同一类别内的不同对象实例。</li>
+<li>通常用于场景理解、图像分割、医学图像分析等。</li>
+</ul>
+</li>
+<li><p><strong>相关模型</strong>:如DeepLab、U-Net或FCN（Fully Convolutional Network）。</p>
+</li>
+</ul>
+<h2 id="区别与联系"><a href="#区别与联系" class="headerlink" title="区别与联系"></a>区别与联系</h2><ul>
+<li><strong>图像分类</strong>、<strong>目标检测</strong>、<strong>实例分割</strong>和<strong>语义分割</strong>可以看作是从粗到细、从简单到复杂的层次。</li>
+<li>在<strong>图像分类</strong>中，主要关注图像的整体内容，是识别图像中的整体内容并将其分类到预定义的类别中。</li>
+<li><strong>目标检测</strong>扩展了图像分类的功能，解决“有无”和“位置”问题，检测图像中的对象并确定其位置。</li>
+<li><strong>语义分割</strong>解决“是什么”的问题。</li>
+<li><strong>实例分割</strong> 结合了目标检测和语义分割的功能，不仅检测对象和确定位置，还为每个对象的每个像素提供精确的类别标签，以区分不同对象的不同实例。</li>
+</ul>
+<p>简单来说：目标检测只是检测有无和确定位置，而语义分割则解决的是是什么的问题，而实例分割，则不仅关注有无的问题，还有位置的问题，以及是什么的问题，因此可以说实例分割&#x3D;目标检测+语义分割。</p>
+<p>下面通过一个简单的垃圾分类案例来区分：图像分类、目标检测、语义分割和实例分割。</p>
+<p>图像分类：识别图像中是否存在垃圾（例如，有垃圾或无垃圾）</p>
+<p>目标检测：检测图像中垃圾的位置并为其绘制边界框，指示其存在。</p>
+<p>语义分割：识别图像中是什么种类的垃圾</p>
+<p>实例分割：识别图像中的垃圾及其位置，以及确定是什么种类的垃圾</p>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">神马木牛</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://shenmamuniu.github.io/2024/04/21/ji-suan-ji-shi-jue-zhong-de-ji-ge-ren-wu/">https://shenmamuniu.github.io/2024/04/21/ji-suan-ji-shi-jue-zhong-de-ji-ge-ren-wu/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">神马木牛</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/">
+                                    <span class="chip bg-color">计算机视觉</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="qq,qzone,wechat,weibo,douban" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2024/04/21/ji-suan-ji-shi-jue-zhi-shu-ju-ji-jian-jie/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/23.jpg" class="responsive-img" alt="计算机视觉之数据集简介">
+                        
+                        <span class="card-title">计算机视觉之数据集简介</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            数据集在计算机视觉和图像处理任务中起着至关重要的作用。下面我将介绍一些常用的图像处理数据集，包括它们的种类和主要区别：
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2024-04-21
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/" class="post-category">
+                                    计算机视觉
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/">
+                        <span class="chip bg-color">计算机视觉</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2024/04/21/websocket-zai-duo-ke-hu-duan-ying-yong-zhong-de-zhu-dong-tui-song/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="WebSocket在多客户端应用中的主动推送">
+                        
+                        <span class="card-title">WebSocket在多客户端应用中的主动推送</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            WebSocket允许服务器和客户端之间建立持久的双向通信通道。在WebSocket中，服务器可以主动向客户端发送消息，而不仅仅是响应客户端发送的请求。 
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2024-04-21
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Websocket/" class="post-category">
+                                    Websocket
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Websocket/">
+                        <span class="chip bg-color">Websocket</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+
+  <!-- 是否加载使用自带的 prismjs. -->
+  <script type="text/javascript" src="/libs/prism/prism.min.js"></script>
+
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down" style="margin-top:-60px;">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2019-2024</span>
+            
+            <a href="/about" target="_blank">神马木牛</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+                &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                        class="white-color">81.4k</span>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 白天和黑夜主题 -->
+<div class="stars-con">
+    <div id="stars"></div>
+    <div id="stars2"></div>
+    <div id="stars3"></div>  
+</div>
+
+<script>
+    function switchNightMode() {
+        $('<div class="Cuteen_DarkSky"><div class="Cuteen_DarkPlanet"></div></div>').appendTo($('body')),
+        setTimeout(function () {
+            $('body').hasClass('DarkMode') 
+            ? ($('body').removeClass('DarkMode'), localStorage.setItem('isDark', '0'), $('#sum-moon-icon').removeClass("fa-sun").addClass('fa-moon')) 
+            : ($('body').addClass('DarkMode'), localStorage.setItem('isDark', '1'), $('#sum-moon-icon').addClass("fa-sun").removeClass('fa-moon')),
+            
+            setTimeout(function () {
+            $('.Cuteen_DarkSky').fadeOut(1e3, function () {
+                $(this).remove()
+            })
+            }, 2e3)
+        })
+    }
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    
+
+    
+
+    <!-- 雪花特效 -->
+    
+
+    <!-- 鼠标星星特效 -->
+    
+
+    
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+    <script type="text/javascript" src="/libs/background/ribbon-dynamic.js" async="async"></script>
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

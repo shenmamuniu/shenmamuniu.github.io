@@ -1,0 +1,1105 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="WebSocket在多客户端应用中的主动推送, 神马木牛">
+    <meta name="description" content="WebSocket允许服务器和客户端之间建立持久的双向通信通道。在WebSocket中，服务器可以主动向客户端发送消息，而不仅仅是响应客户端发送的请求。 
+
+
+WebSocket 概述WebSocket 是一种提供实时、双向通信的网络协议，">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>WebSocket在多客户端应用中的主动推送 | 神马木牛</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+    
+
+
+    <!-- bg-cover style     -->
+
+
+
+<link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+<link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+<link rel="stylesheet" type="text/css" href="/css/matery.css">
+<link rel="stylesheet" type="text/css" href="/css/my.css">
+<link rel="stylesheet" type="text/css" href="/css/dark.css" media="none" onload="if(media!='all')media='all'">
+
+
+
+
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+    <link rel="stylesheet" href="/css/post.css">
+
+
+
+
+    
+
+
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+                    <!-- <img src="/medias/logo.png" class="logo-img" alt="LOGO"> -->
+                    
+                    <span class="logo-span">神马木牛</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+  <li>
+    <a href="javascript:;" class="waves-effect waves-light" onclick="switchNightMode()" title="深色/浅色模式" >
+      <i id="sum-moon-icon" class="fas fa-sun" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">神马木牛</div>
+        <div class="logo-desc">
+            
+            Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+<script src="/libs/cryptojs/crypto-js.min.js"></script>
+<script>
+    (function() {
+        let pwd = '';
+        if (pwd && pwd.length > 0) {
+            if (pwd !== CryptoJS.SHA256(prompt('请输入访问本文章的密码')).toString(CryptoJS.enc.Hex)) {
+                alert('密码错误，将返回主页！');
+                location.href = '/';
+            }
+        }
+    })();
+</script>
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/2.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">WebSocket在多客户端应用中的主动推送</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/Websocket/">
+                                <span class="chip bg-color">Websocket</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/Websocket/" class="post-category">
+                                Websocket
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2024-04-21
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2024-04-21
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    2.5k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    8 分
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.min.css">
+        
+
+        
+        <!-- 代码块折行 -->
+        <style type="text/css">
+            code[class*="language-"], pre[class*="language-"] { white-space: pre-wrap !important; }
+        </style>
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <p>WebSocket允许服务器和客户端之间建立持久的双向通信通道。在WebSocket中，服务器可以主动向客户端发送消息，而不仅仅是响应客户端发送的请求。 </p>
+<span id="more"></span>
+
+<h3 id="WebSocket-概述"><a href="#WebSocket-概述" class="headerlink" title="WebSocket 概述"></a>WebSocket 概述</h3><p>WebSocket 是一种提供实时、双向通信的网络协议，允许客户端和服务器之间建立持久的连接，实现数据的实时交互。</p>
+<h3 id="WebSocket-优势"><a href="#WebSocket-优势" class="headerlink" title="WebSocket 优势"></a>WebSocket 优势</h3><ol>
+<li><strong>实时性</strong>：提供实时的双向通信，支持服务器主动推送数据给客户端。</li>
+<li><strong>效率和性能</strong>：减少不必要的 HTTP 请求和响应，提高数据传输效率和系统性能。</li>
+<li><strong>灵活性</strong>：提供更灵活的数据推送机制，根据客户端需求动态地发送不同的数据。</li>
+</ol>
+<p>与Ajax轮询的区别：</p>
+<ul>
+<li><p><strong>实时性</strong>：WebSocket提供实时的双向通信，可以更快速地响应和处理地图范围的变化，而AJAX轮询可能会存在一定的延迟。</p>
+</li>
+<li><p><strong>效率和性能</strong>：WebSocket减少了不必要的HTTP请求和响应，可以提供更高效和更低延迟的数据传输。</p>
+</li>
+<li><p><strong>灵活性</strong>：WebSocket提供更灵活的数据推送机制，可以根据客户端需求动态地发送不同的数据。</p>
+</li>
+<li><p><strong>服务器和网络负载</strong>：WebSocket可以减少服务器和网络的负载，因为它不需要频繁地处理和响应大量的轮询请求。</p>
+</li>
+</ul>
+<p>在动态地图范围和实时数据更新的场景中，WebSocket通常能够提供更好的实时性、效率和灵活性，尤其是当地图范围频繁变化且需要实时更新时。虽然WebSocket需要处理复杂的订阅和过滤逻辑，但它提供了一个更强大和灵活的数据推送机制，有助于实现更高效和实时的数据交互。</p>
+<h3 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h3><p>WebSocket适用于需要实时双向通信的场景，它提供了持久的连接，允许服务器和客户端之间实时、低延迟地交换数据。以下是一些适合使用WebSocket的常见场景：</p>
+<ol>
+<li><p><strong>即时通讯应用</strong>：</p>
+<ul>
+<li>聊天室、在线游戏、即时消息应用等需要实时双向通信的应用场景。</li>
+</ul>
+</li>
+<li><p><strong>实时数据更新</strong>：</p>
+<ul>
+<li>股票市场、实时监控系统、实时协作工具等需要实时更新数据的应用。</li>
+</ul>
+</li>
+<li><p><strong>实时通知和提醒</strong>：</p>
+<ul>
+<li>社交媒体通知、邮件通知、即时新闻推送等需要实时通知用户的场景。</li>
+</ul>
+</li>
+<li><p><strong>在线协作和共享</strong>：</p>
+<ul>
+<li>实时协作文档编辑、在线白板、远程会议等需要多用户实时协作的场景。</li>
+</ul>
+</li>
+<li><p><strong>实时位置追踪和地理信息系统（GIS）</strong>： ：</p>
+</li>
+</ol>
+<ul>
+<li>实时位置共享、车辆追踪、物流跟踪等需要实时位置更新的应用。</li>
+</ul>
+<ol start="6">
+<li><p><strong>实时游戏和交互应用</strong>：</p>
+<ul>
+<li>实时多人在线游戏、虚拟现实应用、实时交互应用等需要高度实时响应的应用。</li>
+</ul>
+</li>
+<li><p><strong>在线广播和直播</strong>：</p>
+<ul>
+<li>实时音频&#x2F;视频广播、直播流处理等需要实时传输大量数据的应用。</li>
+</ul>
+</li>
+<li><p><strong>实时客户支持和服务</strong>：</p>
+<ul>
+<li>在线客服聊天、远程协助、实时问题解决等需要即时响应的客户支持服务。</li>
+</ul>
+</li>
+<li><p><strong>物联网（IoT）应用</strong>：</p>
+<ul>
+<li>远程设备监控、智能家居控制、工业自动化等需要实时控制和监控设备的应用。</li>
+</ul>
+</li>
+</ol>
+<p>WebSocket提供了与传统HTTP请求&#x2F;响应模型不同的实时双向通信能力，使得它成为上述场景中的理想选择。</p>
+<blockquote>
+<p> 注意：在实际应用中，需要确保WebSocket连接的安全性和可靠性，可以使用WSS（WebSocket Secure）协议或其他安全措施来加密和保护通信数据。 </p>
+</blockquote>
+<h3 id="WebSocket-在多客户端应用中的应用"><a href="#WebSocket-在多客户端应用中的应用" class="headerlink" title="WebSocket 在多客户端应用中的应用"></a>WebSocket 在多客户端应用中的应用</h3><p>WebSocket连接是一个持久的双向通信通道，每个客户端与服务器建立的WebSocket连接都有一个唯一的标识符，通常称为“WebSocket Session ID”或“WebSocket Connection ID”。通过这个标识符，服务器可以区分不同的客户端，并向特定的客户端发送消息。</p>
+<p>以下是如何在WebSocket服务器端向特定客户端发送消息的基本步骤：</p>
+<ol>
+<li><strong>建立WebSocket连接并保存连接信息</strong>：<ul>
+<li>当客户端与服务器建立WebSocket连接时，服务器通常会为每个连接生成一个唯一的ID，并保存与该连接相关的信息（如连接ID、客户端IP地址等）。</li>
+</ul>
+</li>
+<li><strong>发送消息到特定客户端</strong>：<ul>
+<li>当服务器需要向特定客户端发送消息时，可以使用该客户端的连接ID来标识目标客户端，并通过其连接对象发送消息。</li>
+</ul>
+</li>
+</ol>
+<p>这里需要关注的点就是连接id的存储，最简单的就是在服务端创建一个共享的字段或变量来存储客户端数据。这种方法简化了数据管理和交互过程，使得服务器能够根据客户端的需求实时地响应和推送数据。</p>
+<p>在实际应用中，根据具体的需求和场景，还可以进一步优化和扩展这种设计，例如：</p>
+<ul>
+<li><p><strong>数据分区和缓存</strong>：根据地图范围或其他条件对数据进行分区和缓存，提高数据检索和推送的效率。</p>
+</li>
+<li><p><strong>状态管理和验证</strong>：添加状态管理和验证机制，确保客户端的地图范围和数据状态的一致性和有效性。</p>
+</li>
+<li><p><strong>客户端管理和扩展</strong>：扩展客户端管理功能，包括连接管理、状态跟踪、异常处理等，以提高系统的稳定性和可靠性。</p>
+</li>
+</ul>
+<p>总的来说，这种简单而直接的方法为 WebSocket 应用提供了一个灵活、实时和高效的数据管理和交互机制，适用于多种实时数据推送和通信场景。</p>
+<h3 id="Websocket在实时位置追踪中的应用"><a href="#Websocket在实时位置追踪中的应用" class="headerlink" title="Websocket在实时位置追踪中的应用"></a>Websocket在实时位置追踪中的应用</h3><p>在实时位置追踪应用中，WebSocket通常用于建立持久的双向通信通道，以实时更新和共享设备或用户的位置数据。其数据流向大致为：<br>监控客户端(如大屏等)-&gt;websocket服务器-&gt;数据库&lt;-IOT设备(或车辆等)。<br>具体描述为：</p>
+<ol>
+<li><p><strong>客户端（如Web应用、移动应用等）</strong>：</p>
+<ul>
+<li>用户通过客户端与WebSocket服务器建立连接。</li>
+<li>客户端可以发送命令、请求或其他消息到WebSocket服务器，如请求最新的设备位置、控制设备状态等。</li>
+</ul>
+</li>
+<li><p><strong>WebSocket服务器</strong>：</p>
+<ul>
+<li>WebSocket服务器负责与客户端建立和管理WebSocket连接。</li>
+<li>当接收到客户端的消息时，WebSocket服务器可以进行处理、转发或存储，并根据业务逻辑执行相应的操作。</li>
+</ul>
+</li>
+<li><p><strong>数据库</strong>：</p>
+<ul>
+<li>WebSocket服务器可以与数据库进行交互，读取或写入数据。</li>
+<li>例如，保存设备的历史位置数据、查询设备状态、更新设备配置等。</li>
+</ul>
+</li>
+<li><p><strong>IOT设备</strong>：</p>
+<ul>
+<li>IOT设备可以与WebSocket服务器建立连接，通过WebSocket协议发送和接收数据。</li>
+<li>WebSocket服务器可以控制IOT设备，发送指令或配置信息，并接收设备的状态、传感器数据等。</li>
+</ul>
+</li>
+</ol>
+<p>这种架构允许实现高度实时、灵活和可扩展的应用，使得客户端、服务器、数据库和IOT设备之间能够实时、可靠地交换数据和指令。</p>
+<p>然而，需要注意的是，在设计和实现这样的系统时，需要考虑安全性、性能优化、错误处理、数据同步和一致性等关键问题，以确保系统的稳定性、可靠性和安全性。</p>
+<h3 id="Websocket如何确定哪些更新的数据发送给客户端"><a href="#Websocket如何确定哪些更新的数据发送给客户端" class="headerlink" title="Websocket如何确定哪些更新的数据发送给客户端"></a><em>Websocket如何确定哪些更新的数据发送给客户端</em></h3><p>WebSocket本身只负责数据的推送和通信，它并不关心数据的内容或数据是否是更新的。WebSocket仅提供了一个持久的双向通信通道，允许服务器实时地向客户端发送消息。</p>
+<p>要区分哪些数据是更新的，通常需要在应用的业务逻辑中进行处理。以下是一些常见的方法来识别和处理更新数据：</p>
+<ol>
+<li><p><strong>数据版本或时间戳</strong>：</p>
+<ul>
+<li>在发送数据时，可以包含一个版本号或时间戳，客户端可以使用这些信息来检查数据是否是最新的。</li>
+<li>当客户端接收到新的数据时，比较版本号或时间戳，如果新数据的版本号或时间戳较新，则表示数据已更新。</li>
+</ul>
+</li>
+<li><p><strong>状态或标志位</strong>：</p>
+<ul>
+<li>在数据中添加一个状态字段或标志位，表示数据的状态（如“更新”、“新增”、“删除”等）。</li>
+<li>客户端在接收到数据时，根据状态字段或标志位来判断数据的变化类型。</li>
+</ul>
+</li>
+<li><p><strong>数据差异比较</strong>：</p>
+<ul>
+<li>使用数据比较算法（如哈希比较、差异检测等）来比较新旧数据，识别数据的变化部分。</li>
+<li>只发送数据的变化部分或差异，减少数据传输量和处理成本。</li>
+</ul>
+</li>
+<li><p><strong>事件驱动更新</strong>：</p>
+<ul>
+<li>使用事件驱动机制，当数据发生变化时，触发事件并发送更新通知。</li>
+<li>客户端订阅相应的事件，接收并处理更新通知。</li>
+</ul>
+</li>
+<li><p><strong>轮询或查询更新</strong>：</p>
+<ul>
+<li>客户端定期查询或轮询服务器，检查是否有新的数据更新。</li>
+<li>服务器在数据发生变化时，保存更新标志或版本信息，供客户端查询使用。</li>
+</ul>
+</li>
+</ol>
+<p>在实际应用中，可以根据具体需求和场景选择合适的方法或组合使用多种方法来识别和处理数据更新。WebSocket提供了实时通信的能力，使得数据更新的通知和推送可以实时地传输给客户端，从而实现实时数据同步和通知。</p>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">神马木牛</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://shenmamuniu.github.io/2024/04/21/websocket-zai-duo-ke-hu-duan-ying-yong-zhong-de-zhu-dong-tui-song/">https://shenmamuniu.github.io/2024/04/21/websocket-zai-duo-ke-hu-duan-ying-yong-zhong-de-zhu-dong-tui-song/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">神马木牛</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/Websocket/">
+                                    <span class="chip bg-color">Websocket</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="qq,qzone,wechat,weibo,douban" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2024/04/21/ji-suan-ji-shi-jue-zhong-de-ji-ge-ren-wu/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="计算机视觉中的几个任务">
+                        
+                        <span class="card-title">计算机视觉中的几个任务</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            计算机视觉是一门研究如何使机器“看”的科学和技术，它涉及使机器能够自动地从图像或视频中理解、分析和解释视觉信息的过程。
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2024-04-21
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/" class="post-category">
+                                    计算机视觉
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/">
+                        <span class="chip bg-color">计算机视觉</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2024/04/21/windows-shi-yong-bat-qi-dong-duo-ge-ying-yong/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/14.jpg" class="responsive-img" alt="windows使用bat启动多个应用">
+                        
+                        <span class="card-title">windows使用bat启动多个应用</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            每次开机都要开几个程序，于是将打开程序的这几个步骤写入到bat脚本中实现点击脚本自动打开的功能。
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2024-04-21
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/BAT/" class="post-category">
+                                    BAT
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/BAT/">
+                        <span class="chip bg-color">BAT</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+
+  <!-- 是否加载使用自带的 prismjs. -->
+  <script type="text/javascript" src="/libs/prism/prism.min.js"></script>
+
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down" style="margin-top:-60px;">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2019-2024</span>
+            
+            <a href="/about" target="_blank">神马木牛</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+                &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                        class="white-color">81.4k</span>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 白天和黑夜主题 -->
+<div class="stars-con">
+    <div id="stars"></div>
+    <div id="stars2"></div>
+    <div id="stars3"></div>  
+</div>
+
+<script>
+    function switchNightMode() {
+        $('<div class="Cuteen_DarkSky"><div class="Cuteen_DarkPlanet"></div></div>').appendTo($('body')),
+        setTimeout(function () {
+            $('body').hasClass('DarkMode') 
+            ? ($('body').removeClass('DarkMode'), localStorage.setItem('isDark', '0'), $('#sum-moon-icon').removeClass("fa-sun").addClass('fa-moon')) 
+            : ($('body').addClass('DarkMode'), localStorage.setItem('isDark', '1'), $('#sum-moon-icon').addClass("fa-sun").removeClass('fa-moon')),
+            
+            setTimeout(function () {
+            $('.Cuteen_DarkSky').fadeOut(1e3, function () {
+                $(this).remove()
+            })
+            }, 2e3)
+        })
+    }
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    
+
+    
+
+    <!-- 雪花特效 -->
+    
+
+    <!-- 鼠标星星特效 -->
+    
+
+    
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+    <script type="text/javascript" src="/libs/background/ribbon-dynamic.js" async="async"></script>
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>
